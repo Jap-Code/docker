@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  container1:
+    build: .
+    command: python container1.py  # Container 1 starten
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    networks:
+      - app-network
+
+  container2:
+    build: .
+    command: python container2.py  # Container 2 starten
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    networks:
+      - app-network
+
+  container3:
+    build: .
+    command: python container3.py  # Container 3 starten
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"  # RabbitMQ Port
+      - "15672:15672"  # RabbitMQ Management Plugin Port (optional)
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
