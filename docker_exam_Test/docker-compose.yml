@@ -13,6 +13,12 @@ services:
       - "8000:8000"
     networks:
       - mynetwork
+    healthcheck:
+      test: ["CMD-SHELL", "ps aux | grep 'uvicorn' | grep -v grep"]
+      interval: 5s
+      retries: 3
+      start_period: 10s
+      timeout: 5s
 
   container1:
     build:
@@ -21,15 +27,46 @@ services:
     #mac spezifisch -> für linux dann löschen
     platform: linux/amd64
     depends_on:
-      - fastapi
+      fastapi:
+        condition: service_healthy
     volumes:
       - ./logs:/app/logs
     networks:
       - mynetwork
 
+
+  # container2:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.container2
+  #   #mac spezifisch -> für linux dann löschen
+  #   platform: linux/amd64
+  #   depends_on:
+  #     - fastapi
+  #   volumes:
+  #     - ./logs:/app/logs
+  #   networks:
+  #     - mynetwork
+  
+
+  # container3:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.container3
+  #   #mac spezifisch -> für linux dann löschen
+  #   platform: linux/amd64
+  #   depends_on:
+  #     - fastapi
+  #   volumes:
+  #     - ./logs:/app/logs
+  #   networks:
+  #     - mynetwork
+
 networks:
   mynetwork:
     driver: bridge
+
+
 
 
 

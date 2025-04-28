@@ -4,9 +4,13 @@ import requests
 
 print("container1 startet..")
 
-# Request an API
+api = "fastapi"
+port = "8000"
+
+# requête
 r = requests.get(
-    url='http://fastapi:8000/permissions?username=alice&password=wonderland'
+    url=f"http://{api}:{port}/permissions?username=alice&password=wonderland"
+    
 )
 
 # Text-Template für die Ausgabe
@@ -38,4 +42,4 @@ print(output.format(status_code=status_code, test_status=test_status))
 # Ausgabe ins Log-File
 with open(logPath, 'a') as file:
     file.write(output.format(status_code=status_code, test_status=test_status))
-    file.write("\nthis is a test >>> it worked..\n")
+
