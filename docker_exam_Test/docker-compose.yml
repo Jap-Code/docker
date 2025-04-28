@@ -1,0 +1,35 @@
+#verion: '3.8'
+
+services:
+  #datascientest/fastapi
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
+    #mac spezifisch -> für linux dann löschen
+    platform: linux/amd64
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    networks:
+      - mynetwork
+
+  container1:
+    build:
+      context: .
+      dockerfile: Dockerfile.container1
+    #mac spezifisch -> für linux dann löschen
+    platform: linux/amd64
+    depends_on:
+      - fastapi
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+
+

@@ -1,0 +1,24 @@
+
+============================
+    Authentication test
+============================
+request done at "/permissions"
+| username="alice"
+| password="wonderland"
+expected result = 200
+actual result = 200
+==>  SUCCESS
+
+this is a test >>> it worked..
+
+============================
+    Authentication test
+============================
+request done at "/permissions"
+| username="alice"
+| password="wonderland"
+expected result = 200
+actual result = 200
+==>  SUCCESS
+
+this is a test >>> it worked..
