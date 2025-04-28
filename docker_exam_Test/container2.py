@@ -25,7 +25,7 @@ for name, password in authenticated.items():
     ============================
         Authorisation test
     ============================
-    request done at "v1 and v2"
+    request done at "permissions"
     | username = {name}
     | v1 status = {v1_status_code}
     | v2 status = {v2_status_code}
