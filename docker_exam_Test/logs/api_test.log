@@ -8,6 +8,7 @@
     expected result = 200
     actual result = 200
     ==>  SUCCESS
+    ============================
     
     ============================
         Authentication test
@@ -18,6 +19,7 @@
     expected result = 200
     actual result = 200
     ==>  SUCCESS
+    ============================
     
     ============================
         Authentication test
@@ -28,4 +30,45 @@
     expected result = 200
     actual result = 403
     ==>  FAILURE
+    ============================
     
+    ============================
+        Authorisation test
+    ============================
+    request done at "v1 and v2"
+    | username = alice
+    | v1 status = 200
+    | v2 status = 200
+    ============================
+    
+    ============================
+        Authorisation test
+    ============================
+    request done at "v1 and v2"
+    | username = bob
+    | v1 status = 200
+    | v2 status = 403
+    ============================
+    
+        ============================
+                Content test
+        ============================
+        request done at "/v1/sentinent"
+        | username = alice
+        | sentence = life is beautiful
+        | score V1 = 0.5994
+        | score V2 = 0.5994
+        ============================
+
+        
+        ============================
+                Content test
+        ============================
+        request done at "/v1/sentinent"
+        | username = alice
+        | sentence = that sucks
+        | score V1 = -0.3612
+        | score V2 = -0.3612
+        ============================
+
+        

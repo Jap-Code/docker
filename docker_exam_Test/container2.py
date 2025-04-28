@@ -6,36 +6,44 @@ import json
 api = "fastapi"
 port = "8000"
 
-with open('/app/logs/validated.json', 'r') as f:
-    validated = json.load(f)
+with open('/app/logs/authenticated.json', 'r') as f:
+    authenticated = json.load(f)
 
-for name, password in userdict.items():
+authorised = {}
+
+for name, password in authenticated.items():
     # requête
-    r = requests.get(
-        url=f"http://{api}:{port}/permissions?username={name}&password={password}"   
+    rv1 = requests.get(
+        url=f"http://{api}:{port}/v1/sentiment?username={name}&password={password}&sentence=stentence" 
+    )
+
+    rv2 = requests.get(
+        url=f"http://{api}:{port}/v2/sentiment?username={name}&password={password}&sentence=stentence"
     )
 
     output = '''
     ============================
-        Authentication test
+        Authorisation test
     ============================
-    request done at "/permissions"
+    request done at "v1 and v2"
     | username = {name}
-    | password = {password}
-    expected result = 200
-    actual result = {status_code}
-    ==>  {test_status}
+    | v1 status = {v1_status_code}
+    | v2 status = {v2_status_code}
+    ============================
     '''
 
     logPath = "/app/logs/api_test.log"
 
-    status_code = r.status_code
-    if status_code == 200:
-        test_status = 'SUCCESS'
-    else:
-        test_status = 'FAILURE'
+    v1_status_code = rv1.status_code
+    v2_status_code = rv2.status_code
 
-    print(output.format(name=name, password=password, status_code=status_code, test_status=test_status))
+    print(output.format(name=name, password=password, v1_status_code=v1_status_code, v2_status_code=v2_status_code))
 
     with open(logPath, 'a') as file:
-        file.write(output.format(name=name, password=password, status_code=status_code, test_status=test_status))
+        file.write(output.format(name=name, password=password, v1_status_code=v1_status_code, v2_status_code=v2_status_code))
+
+    if v1_status_code == 200 and v2_status_code == 200:
+        authorised.update({name: password})
+
+with open('/app/logs/authorised.json', 'w') as aufile:
+    json.dump(authorised, aufile, indent=4)

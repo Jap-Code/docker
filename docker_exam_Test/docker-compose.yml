@@ -17,7 +17,7 @@ services:
       test: ["CMD-SHELL", "ps aux | grep 'uvicorn' | grep -v grep"]
       interval: 5s
       retries: 3
-      start_period: 10s
+      start_period: 5s
       timeout: 5s
 
   container1:
@@ -35,32 +35,34 @@ services:
       - mynetwork
 
 
-  # container2:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.container2
-  #   #mac spezifisch -> für linux dann löschen
-  #   platform: linux/amd64
-  #   depends_on:
-  #     - fastapi
-  #   volumes:
-  #     - ./logs:/app/logs
-  #   networks:
-  #     - mynetwork
+  container2:
+    build:
+      context: .
+      dockerfile: Dockerfile.container2
+    #mac spezifisch -> für linux dann löschen
+    platform: linux/amd64
+    depends_on:
+      container1:
+        condition: service_completed_successfully
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - mynetwork
   
 
-  # container3:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.container3
-  #   #mac spezifisch -> für linux dann löschen
-  #   platform: linux/amd64
-  #   depends_on:
-  #     - fastapi
-  #   volumes:
-  #     - ./logs:/app/logs
-  #   networks:
-  #     - mynetwork
+  container3:
+    build:
+      context: .
+      dockerfile: Dockerfile.container3
+    #mac spezifisch -> für linux dann löschen
+    platform: linux/amd64
+    depends_on:
+      container2:
+        condition: service_completed_successfully
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:

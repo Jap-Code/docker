@@ -13,7 +13,7 @@ userdict = {
     "clementine": "mandarine"
 }
 
-validated = {}
+authenticated = {}
 
 for name, password in userdict.items():
     # requête
@@ -31,10 +31,11 @@ for name, password in userdict.items():
     expected result = 200
     actual result = {status_code}
     ==>  {test_status}
+    ============================
     '''
 
     logPath = "/app/logs/api_test.log"
-    envPath = "/app/logs/validated.json"
+    envPath = "/app/logs/authenticated.json"
 
     status_code = r.status_code
     if status_code == 200:
@@ -48,7 +49,7 @@ for name, password in userdict.items():
         file.write(output.format(name=name, password=password, status_code=status_code, test_status=test_status))
 
     if test_status == 'SUCCESS':
-        validated.update({name: password})
+        authenticated.update({name: password})
         
 with open(envPath, 'w') as efile:
-    json.dump(validated, efile, indent=4)
+    json.dump(authenticated, efile, indent=4)
