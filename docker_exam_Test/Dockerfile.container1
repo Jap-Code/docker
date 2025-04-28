@@ -8,5 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p /app/logs && chmod 777 /app/logs
 
 COPY container1.py .
+COPY users.json .
 
 CMD ["python3", "container1.py"]

@@ -5,12 +5,15 @@ import json
 api = "fastapi"
 port = "8000"
 
-sentences = ["life is beautiful", "that sucks"]
+#sentences = ["life is beautiful", "that sucks"]
+
+with open('sentences.json', 'r') as f:
+    sentences = json.load(f)
 
 with open('/app/logs/authorised.json', 'r') as f:
     authorised = json.load(f)
 
-for sentence in sentences:
+for nr, sentence in sentences.items():
     for name, password in authorised.items():
 
         # requête
@@ -26,7 +29,7 @@ for sentence in sentences:
         ============================
                 Content test
         ============================
-        request done at "/v1/sentinent"
+        request done at "v1 and v2"
         | username = {name}
         | sentence = {sentence}
         | score V1 = {scoreV1}

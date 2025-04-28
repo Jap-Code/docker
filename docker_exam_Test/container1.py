@@ -6,12 +6,15 @@ import json
 api = "fastapi"
 port = "8000"
 
+with open('users.json', 'r') as f:
+    userdict = json.load(f)
+
 #userdict -> move to .env after test & COPY via Dockerfile
-userdict = {
-    "alice": "wonderland",
-    "bob": "builder",
-    "clementine": "mandarine"
-}
+# userdict = {
+#     "alice": "wonderland",
+#     "bob": "builder",
+#     "clementine": "mandarine"
+# }
 
 authenticated = {}
 

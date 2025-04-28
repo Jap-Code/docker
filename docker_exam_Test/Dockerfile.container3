@@ -8,5 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p logs
 
 COPY container3.py .
+COPY sentences.json .
 
 CMD ["python3", "container3.py"]
