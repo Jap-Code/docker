@@ -5,8 +5,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-
-RUN mkdir -p logs
+RUN mkdir -p /app/logs && chmod 777 /app/logs
 
 COPY container1.py .
 
