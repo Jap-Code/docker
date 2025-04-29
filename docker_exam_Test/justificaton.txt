@@ -12,7 +12,7 @@ Container3 ist waiting for container2 to finish its service and then takes the c
 'authorised.json' file and takes the sentences from the 'sentences.json' file to work for each
 sentence the test on v1 and v2.
 
-Every test result is logged in the 'api_test.log' file in folder logs - the volume all three containers share
+Every test result is logged in the 'api_test.log' file in folder /logs - the volume all three containers share
 for the files to be persitent. In this volume the created json files can be found too. My goal was to have a 
 fully automated test chain which can be executed by a simple "docker-compose up" (maybe later replaced by a github-actions 
 trigger if i got that right).
