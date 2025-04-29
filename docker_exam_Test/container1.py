@@ -48,8 +48,9 @@ for name, password in userdict.items():
 
     print(output.format(name=name, password=password, status_code=status_code, test_status=test_status))
 
-    with open(logPath, 'a') as file:
-        file.write(output.format(name=name, password=password, status_code=status_code, test_status=test_status))
+    if os.getenv('T1LOG') == '1':
+        with open(logPath, 'a') as file:
+            file.write(output.format(name=name, password=password, status_code=status_code, test_status=test_status))
 
     if test_status == 'SUCCESS':
         authenticated.update({name: password})

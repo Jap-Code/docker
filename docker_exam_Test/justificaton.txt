@@ -1,7 +1,7 @@
 Hello and thank you very much for reviewing my exam. I hope you are fine!
 
 you can start the whole test sequence by executing the 'execute.sh'. After waiting for the uvicorn startup,
-container1 ist running its test. The credentials are taken from the users.json file. Every Name: Password 
+container1 is running its test. The credentials are taken from the users.json file. Every Name: Password 
 combination which returns 200 is added to a 'authenticated.json' file. All others are out of the next tests. 
 
 Container2 waits for container1 to finish its service, and then works through the authorisation tests. It 
@@ -12,12 +12,13 @@ Container3 ist waiting for container2 to finish its service and then takes the c
 'authorised.json' file and takes the sentences from the 'sentences.json' file to work for each
 sentence the test on v1 and v2.
 
-Every test result is logged in the 'api_test.log' file in folder /logs - the volume all three containers share
-for the files to be persitent. In this volume the created json files can be found too. My goal was to have a 
-fully automated test chain which can be executed by a simple "docker-compose up" (maybe later replaced by a github-actions 
-trigger if i got that right).
+Every test result is logged in the 'api_test.log' file in folder /logs (if logs are set to 1 in the .env file) 
+- the volume all three containers share for the files to be persitent. In this volume the created json files 
+can be found too. My goal was to have a fully automated test chain which can be executed by a simple 
+"docker-compose up" (maybe later replaced by a github-actions trigger in if i got that right).
 
 The only thing i haven't figured out yet was to boil down the three dockerfiles for the containers to one. 
 I tried but the added ARGS in the docker-compose file didn't make it into the containers.. so i still have to 
 figure this one out.  
 
+Apart from that, I would be very happy to receive any further suggestions on how I can improve and refine my skills.

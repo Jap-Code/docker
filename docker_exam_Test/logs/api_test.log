@@ -35,7 +35,7 @@
     ============================
         Authorisation test
     ============================
-    request done at "v1 and v2"
+    request done at "/sentinents"
     | username = alice
     | v1 status = 200
     | v2 status = 200
@@ -44,7 +44,7 @@
     ============================
         Authorisation test
     ============================
-    request done at "v1 and v2"
+    request done at "/sentinents"
     | username = bob
     | v1 status = 200
     | v2 status = 403
@@ -70,3 +70,5 @@
         | score V1 = -0.3612
         | score V2 = -0.3612
         ============================
+
+        

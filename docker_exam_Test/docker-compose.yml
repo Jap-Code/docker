@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.fastapi
-    #mac spezifisch -> für linux dann löschen
+    #added for mac 
     platform: linux/amd64
     container_name: fastapi
     ports:
@@ -24,7 +24,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.container1
-    #mac spezifisch -> für linux dann löschen
+    env_file:
+      - .env
+    #added for mac
     platform: linux/amd64
     depends_on:
       fastapi:
@@ -39,7 +41,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.container2
-    #mac spezifisch -> für linux dann löschen
+    env_file:
+      - .env
+    #added for mac
     platform: linux/amd64
     depends_on:
       container1:
@@ -54,7 +58,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.container3
-    #mac spezifisch -> für linux dann löschen
+    env_file:
+      - .env
+    #added for mac
     platform: linux/amd64
     depends_on:
       container2:

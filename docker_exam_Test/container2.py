@@ -25,7 +25,7 @@ for name, password in authenticated.items():
     ============================
         Authorisation test
     ============================
-    request done at "permissions"
+    request done at "/sentinents"
     | username = {name}
     | v1 status = {v1_status_code}
     | v2 status = {v2_status_code}
@@ -38,9 +38,10 @@ for name, password in authenticated.items():
     v2_status_code = rv2.status_code
 
     print(output.format(name=name, password=password, v1_status_code=v1_status_code, v2_status_code=v2_status_code))
-
-    with open(logPath, 'a') as file:
-        file.write(output.format(name=name, password=password, v1_status_code=v1_status_code, v2_status_code=v2_status_code))
+    
+    if os.environ.get('T2LOG') == '1':
+        with open(logPath, 'a') as file:
+            file.write(output.format(name=name, password=password, v1_status_code=v1_status_code, v2_status_code=v2_status_code))
 
     if v1_status_code == 200 and v2_status_code == 200:
         authorised.update({name: password})

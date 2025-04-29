@@ -44,6 +44,7 @@ for nr, sentence in sentences.items():
 
         print(output.format(name=name, sentence=sentence, scoreV1=scoreV1, scoreV2=scoreV2))
 
-        with open(logPath, 'a') as file:
-            file.write(output.format(name=name, sentence=sentence, scoreV1=scoreV1, scoreV2=scoreV2))
+        if os.environ.get('T3LOG') == '1':
+            with open(logPath, 'a') as file:
+                file.write(output.format(name=name, sentence=sentence, scoreV1=scoreV1, scoreV2=scoreV2))
 
